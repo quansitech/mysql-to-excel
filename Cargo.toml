@@ -1,0 +1,14 @@
+[package]
+name = "mysql-to-excel"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+mysql_async = "0.30.0"
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+indicatif = "0.17"
+toml = "0.5"
+anyhow = "1.0.97"
+rust_xlsxwriter = "0.84.0"
+openssl = { version = "0.10", features = ["vendored"] }
