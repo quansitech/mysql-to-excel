@@ -104,7 +104,10 @@ async fn main() -> Result<(), anyhow::Error> {
 
 
 fn load_config() -> Result<Config, anyhow::Error> {
-    let config_str = std::fs::read_to_string("config.toml")?;
+    let exe_path = std::env::current_exe()?;
+    let exe_dir = exe_path.parent().ok_or_else(|| anyhow::anyhow!("Cannot get executable directory"))?;
+    let config_path = exe_dir.join("config.toml");
+    let config_str = std::fs::read_to_string(config_path)?;
     let config: Config = toml::from_str(&config_str)?;
     Ok(config)
 }
