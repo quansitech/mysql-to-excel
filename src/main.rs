@@ -97,19 +97,25 @@ async fn main() -> Result<(), anyhow::Error> {
     }
     
     pb.finish_with_message(format!("导出完成! 共处理 {} 条数据", total_rows));
-    workbook.save("./data.xlsx")?;
+    
+    let excel_path = get_exe_dir()?.join("data.xlsx");
+    workbook.save(excel_path)?;
     drop(conn);
     Ok(())
 }
 
-
 fn load_config() -> Result<Config, anyhow::Error> {
-    let exe_path = std::env::current_exe()?;
-    let exe_dir = exe_path.parent().ok_or_else(|| anyhow::anyhow!("Cannot get executable directory"))?;
-    let config_path = exe_dir.join("config.toml");
+    let config_path = get_exe_dir()?.join("config.toml");
     let config_str = std::fs::read_to_string(config_path)?;
     let config: Config = toml::from_str(&config_str)?;
     Ok(config)
+}
+
+fn get_exe_dir() -> Result<std::path::PathBuf, anyhow::Error> {
+    std::env::current_exe()?
+        .parent()
+        .ok_or_else(|| anyhow::anyhow!("Cannot get executable directory"))
+        .map(|p| p.to_path_buf())
 }
 
 fn append_to_excel(worksheet: &mut Worksheet, row: Vec<String>, row_index: u32) -> Result<(), anyhow::Error> {
