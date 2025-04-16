@@ -3,10 +3,6 @@ use serde::Deserialize;
 use tokio;
 use indicatif::ProgressBar;
 use anyhow::Result;
-<<<<<<< HEAD
-
-use rust_xlsxwriter::*;
-=======
 use rust_xlsxwriter::*;
 use clap::{Parser, Subcommand}; // Added clap imports
 
@@ -29,7 +25,6 @@ enum Commands {
     GenerateMigration(ExcelToMigrationArgs),
 }
 
->>>>>>> master
 
 #[derive(Deserialize, Debug)]
 struct Config {
@@ -54,8 +49,6 @@ struct QueryConfig {
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-<<<<<<< HEAD
-=======
     let cli = Cli::parse();
 
     match cli.command {
@@ -73,7 +66,6 @@ async fn main() -> Result<(), anyhow::Error> {
 // --- Existing export logic moved to its own function ---
 async fn run_export() -> Result<(), anyhow::Error> {
     println!("Running MySQL to Excel export...");
->>>>>>> master
     let config = load_config()?;
 
     let opts = OptsBuilder::default()
