@@ -1,0 +1,7 @@
+/target
+data.txt
+data.xlsx
+config.toml
+.vscode
+
+/migrations

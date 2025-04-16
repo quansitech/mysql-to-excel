@@ -1,0 +1,19 @@
+[package]
+name = "mysql-to-excel"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+mysql_async = "0.30.0"
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+indicatif = "0.17"
+toml = "0.5" # 注意：这里版本是 0.5，不是 0.8.8
+anyhow = "1.0.97"
+rust_xlsxwriter = "0.84.0"
+openssl = { version = "0.10", features = ["vendored"] }
+# 新增依赖
+calamine = "0.24.0" # 用于读取 Excel
+chrono = { version = "0.4", features = ["serde"] } # 用于日期时间和时间戳
+heck = "0.5.0" # 用于转换命名风格 (snake_case)
+clap = { version = "4.5.4", features = ["derive"] } # 用于命令行参数解析
