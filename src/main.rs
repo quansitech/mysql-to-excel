@@ -3,8 +3,33 @@ use serde::Deserialize;
 use tokio;
 use indicatif::ProgressBar;
 use anyhow::Result;
+<<<<<<< HEAD
 
 use rust_xlsxwriter::*;
+=======
+use rust_xlsxwriter::*;
+use clap::{Parser, Subcommand}; // Added clap imports
+
+// Import the new module
+mod excel_to_migration;
+use excel_to_migration::ExcelToMigrationArgs;
+
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
+
+#[derive(Subcommand, Debug)]
+enum Commands {
+    /// Export data from MySQL to an Excel file based on config.toml
+    Export,
+    /// Generate a Laravel migration file from an Excel file
+    GenerateMigration(ExcelToMigrationArgs),
+}
+
+>>>>>>> master
 
 #[derive(Deserialize, Debug)]
 struct Config {
@@ -29,6 +54,26 @@ struct QueryConfig {
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
+<<<<<<< HEAD
+=======
+    let cli = Cli::parse();
+
+    match cli.command {
+        Commands::Export => {
+            run_export().await?;
+        }
+        Commands::GenerateMigration(args) => {
+            excel_to_migration::run(args)?;
+        }
+    }
+
+    Ok(())
+}
+
+// --- Existing export logic moved to its own function ---
+async fn run_export() -> Result<(), anyhow::Error> {
+    println!("Running MySQL to Excel export...");
+>>>>>>> master
     let config = load_config()?;
 
     let opts = OptsBuilder::default()
