@@ -33,6 +33,9 @@
 git clone https://github.com/your-repo/mysql-to-excel.git
 cd mysql-to-excel
 cargo build --release
+
+##可兼容更多的linux版本
+cargo build --release --target x86_64-unknown-linux-musl
 ```
 
 编译后的可执行文件位于 `target/release/mysql-to-excel`
